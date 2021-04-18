@@ -2,8 +2,9 @@ import 'package:nasa_picture/feature/display_images/data/model/images_list.dart'
 
 abstract class ImageScreenState {
   ImageDataList? imageDataList;
+  int index;
 
-  ImageScreenState(this.imageDataList);
+  ImageScreenState(this.imageDataList, {this.index = -1});
 }
 
 class LoadingState extends ImageScreenState {
@@ -15,7 +16,8 @@ class ErrorState extends ImageScreenState {
 }
 
 class LoadedState extends ImageScreenState {
-  int index = -1;
+  int index;
   ImageDataList? imageDataList;
-  LoadedState({this.imageDataList, index}) : super(imageDataList);
+  LoadedState({this.imageDataList, this.index = -1})
+      : super(imageDataList, index: index);
 }
