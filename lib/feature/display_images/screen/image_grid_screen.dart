@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nasa_picture/core/injector/injector.dart';
@@ -23,8 +24,11 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
 
   Widget _body(ImageScreenState state) {
     if (state.imageDataList != null)
-      return GridView.count(
-        crossAxisCount: 2,
+      return GridView(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, childAspectRatio: 1.5),
+        // crossAxisCount: 2,
+        // gridDelegate: ,
         children: AppUtilities.map(
           list: state.imageDataList!.images,
           handler: (index, ImageModel imageDetails) {
@@ -33,12 +37,21 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
                 ImageClickEvent(index),
               ),
               child: Hero(
-                transitionOnUserGestures: true,
-                tag: "$index",
-                child: Image.network(
-                  imageDetails.url,
-                ),
-              ),
+                  transitionOnUserGestures: true,
+                  tag: "$index",
+                  child: Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: CachedNetworkImage(
+                      imageUrl: imageDetails.url,
+                      fit: BoxFit.fill,
+                      placeholder: (context, url) =>
+                          Image.asset('assets/nasa.jpeg'),
+                    ),
+                  )
+                  // Image.network(
+                  //   imageDetails.url,
+                  // ),
+                  ),
             );
           },
         ),
