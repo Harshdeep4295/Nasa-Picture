@@ -1,4 +1,4 @@
-package com.example.nasa_picture
+package com.nasa.pictures
 
 import io.flutter.embedding.android.FlutterActivity
 
