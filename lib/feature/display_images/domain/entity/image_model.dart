@@ -1,8 +1,9 @@
-// To parse this JSON data, do
-//
-//     final imageModel = imageModelFromJson(jsonString);
-
 import 'dart:convert';
+
+ImageModel imageModelFromMap(String str) =>
+    ImageModel.fromMap(json.decode(str));
+
+String imageModelToMap(ImageModel data) => json.encode(data.toMap());
 
 class ImageModel {
   ImageModel({
@@ -25,14 +26,8 @@ class ImageModel {
   String title;
   String url;
 
-  factory ImageModel.fromRawJson(String str) =>
-      ImageModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory ImageModel.fromJson(Map<String, dynamic> json) => ImageModel(
-        copyright: json["copyright"] ??
-            "", // as it is not available in other data, marked as optional.
+  factory ImageModel.fromMap(Map<String, dynamic> json) => ImageModel(
+        copyright: json["copyright"] ?? "",
         date: DateTime.parse(json["date"]),
         explanation: json["explanation"],
         hdurl: json["hdurl"],
@@ -42,7 +37,7 @@ class ImageModel {
         url: json["url"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         "copyright": copyright,
         "date":
             "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",

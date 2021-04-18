@@ -9,14 +9,18 @@ class ImageDataList {
 
   List<ImageModel> images;
 
-  factory ImageDataList.fromRawJson(String str) =>
-      ImageDataList.fromJson(json.decode(str));
-  factory ImageDataList.fromJson(Map<String, dynamic> json) => ImageDataList(
-        images: List<ImageModel>.from(
-            json["images"].map((x) => ImageModel.fromJson(x))),
-      );
+  factory ImageDataList.fromJson(String str) =>
+      ImageDataList.fromMap(json.decode(str));
 
-  ImageModel getImageModelAt(int index) {
-    return images[index];
+  String toJson() => json.encode(toMap());
+
+  factory ImageDataList.fromMap(List<dynamic> json) {
+    // Map<String, dynamic> jsons = {"images": json};
+    return ImageDataList(
+      images: List<ImageModel>.from(json.map((x) => ImageModel.fromMap(x))),
+    );
   }
+  Map<String, dynamic> toMap() => {
+        "images": List<dynamic>.from(images.map((x) => x.toMap())),
+      };
 }

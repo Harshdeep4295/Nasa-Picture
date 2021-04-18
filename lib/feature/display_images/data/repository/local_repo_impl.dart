@@ -8,13 +8,14 @@ class LocalRepositoryImp extends LocalRepository {
   LocalDataSource dataSource;
   LocalRepositoryImp({required this.dataSource});
   @override
-  Either<Failure, ImageDataList> getImageList() {
+  Future<Either<Failure, ImageDataList>> getImageList() async {
     try {
-      ImageDataList? imageDataList = dataSource.getImageList();
+      ImageDataList? imageDataList = await dataSource.getImageList();
       if (imageDataList != null) {
         return Right(imageDataList);
-      } else
+      } else {
         return Left(Error("Some Error Occured"));
+      }
     } on Exception catch (ex) {
       print(ex);
       return Left(Error("not able to get data "));

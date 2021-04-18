@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nasa_picture/core/routes/app_routes.dart';
 import 'package:nasa_picture/core/routes/route_functions.dart';
@@ -21,16 +22,12 @@ class ImageDisplayBloc extends Bloc<ImageScreenEvent, ImageScreenState> {
   Stream<ImageScreenState> mapEventToState(event) async* {
     if (event is LoadDataEvent) {
       yield LoadingState();
-      ImageDataList? value =
-          repository.getImageList().fold((l) => null, (r) => r);
-      if (value != null)
-        yield LoadedState(imageDataList: value);
-      else
-        yield ErrorState();
+      Either<Failure, ImageDataList> value = await repository.getImageList();
+      yield value.fold(
+          (l) => ErrorState(), (r) => LoadedState(imageDataList: r));
     } else if (event is LoadingDataEvent) {
       yield LoadingState();
     } else if (event is ImageClickEvent) {
-      // navigate with index
       Routing.navigateTo(IMAGE_DETAIL_SCREEN, {"index": event.index});
       yield LoadedState(
         imageDataList: this.state.imageDataList,
