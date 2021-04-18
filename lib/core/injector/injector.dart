@@ -11,7 +11,7 @@ Future<void> init() async {
     ImageDisplayBloc(
       initialState: LoadingState(),
       repository: LocalRepositoryImp(
-        dataSource: LocalDataSource(),
+        dataSource: LocalDataSourceImp(),
       ),
     ),
   );
