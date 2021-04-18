@@ -22,26 +22,35 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
   }
 
   Widget _body(ImageScreenState state) {
-    return GridView.count(
-      crossAxisCount: 2,
-      children: AppUtilities.map(
-        list: state.imageDataList!.images,
-        handler: (index, ImageModel imageDetails) {
-          return InkWell(
-            onTap: () => _imageDisplayBloc.add(
-              ImageClickEvent(index),
-            ),
-            child: Hero(
-              transitionOnUserGestures: true,
-              tag: "$index",
-              child: Image.network(
-                imageDetails.url,
+    if (state.imageDataList != null)
+      return GridView.count(
+        crossAxisCount: 2,
+        children: AppUtilities.map(
+          list: state.imageDataList!.images,
+          handler: (index, ImageModel imageDetails) {
+            return InkWell(
+              onTap: () => _imageDisplayBloc.add(
+                ImageClickEvent(index),
               ),
-            ),
-          );
-        },
-      ),
-    );
+              child: Hero(
+                transitionOnUserGestures: true,
+                tag: "$index",
+                child: Image.network(
+                  imageDetails.url,
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    else {
+      return Container(
+          child: Expanded(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ));
+    }
   }
 
   @override
