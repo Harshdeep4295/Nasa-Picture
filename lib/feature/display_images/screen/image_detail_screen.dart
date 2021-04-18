@@ -106,6 +106,7 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: AppStyle.textField(imageDetails.explanation, 14.0),
                     ),
+                    SizedBox(height: 40),
                   ],
                 ),
               ),
