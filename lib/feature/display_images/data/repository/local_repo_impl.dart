@@ -15,9 +15,11 @@ class LocalRepositoryImp extends LocalRepository {
         return Right(imageDataList);
       } else
         return Left(Error("Some Error Occured"));
-    } on Exception {
+    } on Exception catch (ex) {
+      print(ex);
       return Left(Error("not able to get data "));
-    } on Error {
+    } on Error catch (error) {
+      print(error);
       return Left(Error("not able to get data "));
     }
   }
