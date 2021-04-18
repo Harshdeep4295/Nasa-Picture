@@ -25,13 +25,12 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
   }
 
   Widget _body(ImageScreenState state) {
-    if (state.imageDataList != null) {
+    if (state.imageDataList?.images != null) {
       return StaggeredGridView.countBuilder(
           crossAxisCount: 2,
           itemCount: state.imageDataList!.images.length,
           itemBuilder: (BuildContext context, int index) {
-            ImageModel imageDetails =
-                state.imageDataList!.getImageModelAt(index);
+            ImageModel imageDetails = state.imageDataList!.images[index];
             return InkWell(
               onTap: () => _imageDisplayBloc.add(
                 ImageClickEvent(index),
@@ -54,10 +53,8 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
           staggeredTileBuilder: (int index) => new StaggeredTile.fit(1));
     } else {
       return Container(
-          child: Expanded(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
+          child: Center(
+        child: CircularProgressIndicator(),
       ));
     }
   }
