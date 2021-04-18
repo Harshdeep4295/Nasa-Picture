@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:nasa_picture/core/injector/injector.dart';
+import 'package:nasa_picture/core/styles/app_styles.dart';
 import 'package:nasa_picture/core/utils/app_utils.dart';
 import 'package:nasa_picture/feature/display_images/bloc/bloc.dart';
 import 'package:nasa_picture/feature/display_images/bloc/bloc_event.dart';
@@ -23,15 +25,13 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
   }
 
   Widget _body(ImageScreenState state) {
-    if (state.imageDataList != null)
-      return GridView(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, childAspectRatio: 1.5),
-        // crossAxisCount: 2,
-        // gridDelegate: ,
-        children: AppUtilities.map(
-          list: state.imageDataList!.images,
-          handler: (index, ImageModel imageDetails) {
+    if (state.imageDataList != null) {
+      return StaggeredGridView.countBuilder(
+          crossAxisCount: 2,
+          itemCount: state.imageDataList!.images.length,
+          itemBuilder: (BuildContext context, int index) {
+            ImageModel imageDetails =
+                state.imageDataList!.getImageModelAt(index);
             return InkWell(
               onTap: () => _imageDisplayBloc.add(
                 ImageClickEvent(index),
@@ -47,16 +47,12 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
                       placeholder: (context, url) =>
                           Image.asset('assets/nasa.jpeg'),
                     ),
-                  )
-                  // Image.network(
-                  //   imageDetails.url,
-                  // ),
-                  ),
+                  )),
             );
           },
-        ),
-      );
-    else {
+          shrinkWrap: true,
+          staggeredTileBuilder: (int index) => new StaggeredTile.fit(1));
+    } else {
       return Container(
           child: Expanded(
         child: Center(
@@ -70,7 +66,8 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Nasa Pictures"),
+        title: AppStyle.textField("Nasa Pictures", 22),
+        centerTitle: true,
       ),
       body: BlocProvider(
         create: (context) => _imageDisplayBloc,
