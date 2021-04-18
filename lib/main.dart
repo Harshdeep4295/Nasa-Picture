@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:nasa_picture/core/injector/injector.dart';
 import 'package:nasa_picture/core/routes/app_routes.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  init();
   runApp(MyApp());
 }
 
