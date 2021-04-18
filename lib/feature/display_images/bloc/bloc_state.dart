@@ -15,5 +15,7 @@ class ErrorState extends ImageScreenState {
 }
 
 class LoadedState extends ImageScreenState {
-  LoadedState({required ImageDataList imageDataList}) : super(imageDataList);
+  int index = -1;
+  ImageDataList? imageDataList;
+  LoadedState({this.imageDataList, index}) : super(imageDataList);
 }
