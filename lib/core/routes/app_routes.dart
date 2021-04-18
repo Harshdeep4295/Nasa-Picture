@@ -22,7 +22,7 @@ class AppRoutes {
           page: () => ImageDetailScreen(
             index: (routeSettings.arguments as Map)["index"],
           ),
-          transitionDuration: Duration(milliseconds: 300),
+          transitionDuration: Duration(milliseconds: 800),
         );
         break;
       default:
