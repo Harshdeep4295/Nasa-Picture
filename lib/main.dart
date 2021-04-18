@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Color(0xfffad200),
       ),
       onGenerateRoute: (settings) => AppRoutes.toRoute(settings),
     );
