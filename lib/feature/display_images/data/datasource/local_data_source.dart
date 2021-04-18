@@ -2,7 +2,7 @@ import 'package:nasa_picture/feature/display_images/data/model/images_list.dart'
 
 class LocalDataSource {
   ImageDataList? getImageList() {
-    return ImageDataList.fromRawJson(
+    return ImageDataList.fromJson(
       {
         "images": [
           {
@@ -314,7 +314,7 @@ class LocalDataSource {
                 "https://apod.nasa.gov/apod/image/1912/M33-HaLRGB-RayLiao1024.jpg"
           }
         ]
-      }.toString(),
+      },
     );
   }
 }
