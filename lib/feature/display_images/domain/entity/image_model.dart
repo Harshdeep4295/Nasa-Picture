@@ -31,7 +31,7 @@ class ImageModel {
   String toRawJson() => json.encode(toJson());
 
   factory ImageModel.fromJson(Map<String, dynamic> json) => ImageModel(
-        copyright: json["copyright"],
+        copyright: json["copyright"] ?? "",
         date: DateTime.parse(json["date"]),
         explanation: json["explanation"],
         hdurl: json["hdurl"],
