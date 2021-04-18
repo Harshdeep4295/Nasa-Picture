@@ -19,9 +19,7 @@ class AppRoutes {
         break;
       case IMAGE_DETAIL_SCREEN:
         route = GetPageRoute(
-          page: () => ImageDetailScreen(
-            index: (routeSettings.arguments as Map)["index"],
-          ),
+          page: () => ImageDetailScreen(),
           transitionDuration: Duration(milliseconds: 800),
         );
         break;

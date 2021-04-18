@@ -8,8 +8,7 @@ import 'package:nasa_picture/feature/display_images/bloc/bloc.dart';
 import 'package:nasa_picture/feature/display_images/domain/entity/image_model.dart';
 
 class ImageDetailScreen extends StatefulWidget {
-  final int index;
-  ImageDetailScreen({required this.index});
+  ImageDetailScreen();
   @override
   _ImageDetailScreenState createState() => _ImageDetailScreenState();
 }
@@ -27,7 +26,7 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
   Widget build(BuildContext context) {
     return PageView(
       controller: PageController(
-        initialPage: widget.index,
+        initialPage: _imageDisplayBloc.state.index,
         keepPage: true,
       ),
       children: AppUtilities.map(

@@ -28,7 +28,7 @@ class ImageDisplayBloc extends Bloc<ImageScreenEvent, ImageScreenState> {
     } else if (event is LoadingDataEvent) {
       yield LoadingState();
     } else if (event is ImageClickEvent) {
-      Routing.navigateTo(IMAGE_DETAIL_SCREEN, {"index": event.index});
+      Routing.navigateTo(IMAGE_DETAIL_SCREEN);
       yield LoadedState(
         imageDataList: this.state.imageDataList,
         index: event.index,
